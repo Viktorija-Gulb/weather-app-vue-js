@@ -3,14 +3,14 @@
       <input type="text" class="search-bar" placeholder='Search...' />
     </div>
     <h1>hello</h1>
-    <div class='top-section'>
+    <div class='top-section' v-if="typeof results != 'undefined'">
       <span>Weather forecast</span>
-      <span>Town</span>
+      <span>{{results.name}}</span>
       <h2>Day forecast</h2>
     </div>
-    <div class='location-box'>
-      <div>6 deg</div>
-      <h2>Town</h2>
+    <div class='location-box' v-if="typeof results.main != 'undefined'">
+      <div>{{displayTemp(results.main.temp)}}</div>
+      <h2>{{results.name}}</h2>
       <p>weather</p>
     </div>
 
@@ -34,33 +34,40 @@
 
 <script>
 import Cloud from '../IconsAsSvg/Cloud'
+import {API_KEY, CURRENT_WEATHER} from './../constants'
 import axios from 'axios'
 
 export default {
   name: 'Home',
   props: {
+    API_KEY: String,
+    CURRENT_WEATHER: String
   },
   components: {
-    // IconWrite,
     Cloud
   },
+  // data: {
+  //   results: []
+  // },
   data () {
     return {
-      info: null
+      results: {}
     }
   },
   mounted(){
-    console.log('component is mount')
-      axios.get('https://jsonplaceholder.typicode.com/todos/1').then((response) => {
-      console.log('response data ', response.data)
-    })
-  }
-  // mounted () {
-  //   axios.get('https://jsonplaceholder.typicode.com/todos/1').then((response) => {
-  //     console.log('response data ', response.data)
-  //   })
-  // }
-
+    this.fetchData();
+  }, 
   
+  methods: {
+    fetchData(){
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${CURRENT_WEATHER}&appid=${API_KEY}`).then((response) => { 
+        console.log(response.data.main)
+         this.results = response.data
+    }).catch( error => { console.log(error); });
+    },
+
+    displayTemp: function( temp )
+      {return Math.round(temp - 273.15)}
+  },
 }
 </script>
