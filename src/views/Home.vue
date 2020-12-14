@@ -17,6 +17,7 @@
     <div class='bottom-section'>
       <div>Week forecast</div>
       <div>week forecast chart</div>
+      <icon-base width="16" height="16" viewBox='0 0 51 51' icon-name="cloud"><Cloud /></icon-base>
     </div>
 </template>
 
@@ -32,13 +33,17 @@
 
 
 <script>
+import Cloud from '../IconsAsSvg/Cloud'
 import axios from 'axios'
 
 export default {
   name: 'Home',
   props: {
   },
-
+  components: {
+    // IconWrite,
+    Cloud
+  },
   data () {
     return {
       info: null
