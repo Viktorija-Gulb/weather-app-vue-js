@@ -1,6 +1,7 @@
 <template>
     <div class='wrapper'>
       <div class='top-section'>
+        
         <div class='status-bar'>
           <div class='status-bar__cloud'>
             <icon-base width="30" height="30" viewBox='0 0 51 51' icon-name="cloud"><Cloud /></icon-base>
@@ -22,10 +23,10 @@
       </div>
       <div class='main-box' v-if="typeof results.main != 'undefined'">
         <div class='main-box__wrapper'>
-          <div class='main-box__temp'>{{displayTemp(results.main.temp)}}&#176;</div>
-          <h2 class='main-box__town'>{{results.name}}</h2>
+          <!-- <div class='main-box__temp'>{{displayTemp(results.main.temp)}}&#176;</div> -->
+          <h2 class='main-box__town' v-on:click="serchLocation">{{results.name}}</h2>
           <p class='main-box__weather'>
-            <span>{{results.weather[0].main}}</span>
+            <!-- <span>{{results.weather[0].main}}</span> -->
             <icon-base width="25" height="25" iconColor='currentColor' viewBox="0 0 42 27" icon-name="cloud"><CloudySvg /></icon-base>
           </p>
         </div>
@@ -53,19 +54,21 @@
 import Cloud from '../IconsAsSvg/Cloud'
 import SettingsSvg from '../IconsAsSvg/SettingsSvg'
 import CloudySvg from '../IconsAsSvg/CloudySvg'
-import {API_KEY, CURRENT_WEATHER} from './../constants'
+import {API_KEY, LOCATION} from './../constants'
 import axios from 'axios'
+// import TopPanel from '../components/TopPanel.vue'
 
 export default {
   name: 'Home',
   props: {
     API_KEY: String,
-    CURRENT_WEATHER: String
+    LOCATION: String
   },
   components: {
     Cloud,
     SettingsSvg,
-    CloudySvg
+    CloudySvg,
+    // TopPanel
   },
   // data: {
   //   results: []
@@ -73,30 +76,32 @@ export default {
   data () {
     return {
       results: {},
-      weekData: {}
     }
   },
   mounted(){
     this.fetchData();
-    this.weekForecast();
   }, 
   
   methods: {
+    serchLocation: function(){
+      // alert('hello')
+      this.$router.push('/search');
+    },
     fetchData(){
-      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${CURRENT_WEATHER}&appid=${API_KEY}`).then((response) => { 
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${LOCATION}&appid=${API_KEY}`).then((response) => { 
         // console.log('response ', response.data.weather[0].main)
          this.results = response.data
     }).catch( error => { console.log(error); });
     },
 
-    weekForecast() {
-      axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${CURRENT_WEATHER}&appid=${API_KEY}`
-        ).then((response) => { 
-        console.log('response ', response.data)
-         this.weekData = response.data
-    }).catch( error => { console.log(error); });
-    },
+    // weekForecast() {
+    //   axios.get(
+    //     `https://api.openweathermap.org/data/2.5/forecast?q=${CURRENT_WEATHER}&appid=${API_KEY}`
+    //     ).then((response) => { 
+    //     // console.log('response ', response.data)
+    //      this.weekData = response.data
+    // }).catch( error => { console.log(error); });
+    // },
 
     displayTemp: function( temp )
       {return Math.round(temp - 273.15)}

@@ -1,56 +1,82 @@
 <template>
-  <h1>Search Page</h1>
-  <div class='search-box'>
-      <input type="text" class="search-bar" placeholder='Search...' />
+  <div class='wrapper'>
+    <div class='header'>
+      <div class='header__top-bar'>
+        <button class='header__btn'><span>Done</span></button>
+        <div class='header__location'>
+          <span class='header__title'>Location</span>
+          <span class='header__subtitle'>{{ currentWeather.name }}</span>
+        </div>
+      </div>
+      <div class='header__search-box'>
+      <div class='header__left-icon'>
+        <icon-base width="30" height="30" viewBox='0 0 51 51'  icon-name="cloud" iconColor='#fff'><SearchIcon /></icon-base>
+      </div>
+        <input type="text" v-model="search" class="search-bar" placeholder='Search...' @chsnge="console.log(search)"/>
+        <div class='header__right-icon'>
+          <icon-base width="30" height="30" viewBox='0 0 51 51'  icon-name="cloud" iconColor='#fff'><CancelIcon /></icon-base>
+        </div>
+      </div>
     </div>
-
+    <div>
+      <div v-for="city in this.filteredCities" :key="city.id">
+        <p>
+          {{city.name}}
+        </p>
+      </div>
+    </div>
+    
+  </div>
 </template>
 
 <script>
 
-import axios from 'axios'
-import {API_KEY, CURRENT_WEATHER} from './../constants'
+import SearchIcon from '../IconsAsSvg/SearchIcon'
+import CancelIcon from '../IconsAsSvg/CancelIcon'
+import getCurrentWeather from '../composables/getCurrentWeather'
+// import json from '../cityList.json'
 
 export default {
   name: 'Search',
-  props: {
-    API_KEY: String,
-    CURRENT_WEATHER: String
-  },
   components: {
-
+    SearchIcon,
+    CancelIcon
   },
-  // data: {
-  //   results: []
-  // },
-  data () {
+
+  setup() {
+    const {currentWeather, forecast, error, load } = getCurrentWeather()
+    load()
+    return {currentWeather, forecast, error }
+  },
+
+  data() {
     return {
-      results: {},
-     
+      search: '',
+      cityList: [
+        {
+          id: 1,
+          name: 'Vilnius'
+        },
+        {
+          id: 2,
+          name: 'Kaunas'
+        },
+        {
+          id: 3,
+          name: 'Trakai'
+        }
+      ]
     }
   },
-  mounted(){
-    // this.fetchData();
-    this.weekForecast();
-  }, 
-  
-  methods: {
-    // fetchData(){
-    //   axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${CURRENT_WEATHER}&appid=${API_KEY}`).then((response) => { 
-    //     // console.log('response ', response.data.weather[0].main)
-    //      this.results = response.data
-    // }).catch( error => { console.log(error); });
-    // },
 
-    weekForecast() {
-       axios.get(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${CURRENT_WEATHER}&cnt=7&appid=${API_KEY}`).then((response) => { 
-        // console.log('response ', response.data.weather[0].main)
-         this.results = response.data
-    }).catch( error => { console.log(error); });
-    },
-
-    displayTemp: function( temp )
-      {return Math.round(temp - 273.15)}
-  },
+  computed: {
+    filteredCities(){
+      return this.cityList.filter(city => {
+        return city.name.toLowerCase().includes(this.search.toLowerCase())
+       })
+    }
+  }
 }
+
+
 </script>
