@@ -11,7 +11,7 @@
         :location="currentWeather.name" 
         :cloudy="currentWeather.weather[0].main" />
 
-
+      <div>Search result: {{ query }}</div>
       <div class='bottom-section'>
         <div class='bottom-section__title'>Week forecast</div>
         <div class='bottom-section__forecact' >
@@ -22,10 +22,6 @@
 </template>
 
 
-<style lang="scss">
-</style>
-
-
 <script>
 import '../styles/components/Home.scss'
 import WeekForecast from '../components/WeekForecast.vue'
@@ -33,8 +29,6 @@ import HomePageHeader from '../components/HomePageHeader.vue'
 
 import getCurrentWeather from '../composables/getCurrentWeather'
 import CurrentWeather from '../components/CurrentWeather.vue'
-
-
 
 export default {
   name: 'Home',
@@ -44,10 +38,21 @@ export default {
     HomePageHeader,
     CurrentWeather
   },
+  data() {
+    return{
+      query: ''
+    }
+  },
+
   setup() {
     const {currentWeather, error, load } = getCurrentWeather()
     load()
     return {currentWeather, error }
+
+  },
+
+  created() {
+    this.query = this.$route.params.data
   }
 
 }

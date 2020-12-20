@@ -2,7 +2,7 @@
   <div class='wrapper'>
     <div class='header'>
       <div class='header__top-bar'>
-        <button class='header__btn'><span>Done</span></button>
+        <button class='header__btn' @click="shareData()"><span>Done</span></button>
         <div class='header__location'>
           <span class='header__title'>Location</span>
           <span class='header__subtitle'>{{ currentWeather.name }}</span>
@@ -12,18 +12,16 @@
       <div class='header__left-icon'>
         <icon-base width="30" height="30" viewBox='0 0 51 51'  icon-name="cloud" iconColor='#fff'><SearchIcon /></icon-base>
       </div>
-        <input type="search" v-model="search" placeholder='Search...' @chsnge="console.log(search)"/>
+        <input type="search" v-model="query" placeholder='Search...' @keyup.enter="submit"/>
         <div class='header__right-icon'>  
           <icon-base width="30" height="30" viewBox='0 0 51 51'  icon-name="cloud" iconColor='#fff'><CancelIcon /></icon-base>
         </div>
       </div>
     </div>
-    <div>
-      <div v-for="city in this.filteredCities" :key="city.id">
-        <p>
-          {{city.name}}
-        </p>
-      </div>
+    <div class="search-results">
+      <ul class="results-list">
+        <li class="results-list__item"   v-for="city in this.filteredCities" :key="city.id">{{city.name}}</li>
+      </ul>
     </div>
     
   </div>
@@ -34,7 +32,7 @@
 import SearchIcon from '../IconsAsSvg/SearchIcon'
 import CancelIcon from '../IconsAsSvg/CancelIcon'
 import getCurrentWeather from '../composables/getCurrentWeather'
-// import json from '../cityList.json'
+import json from '../cityList.json'
 
 export default {
   name: 'Search',
@@ -51,28 +49,21 @@ export default {
 
   data() {
     return {
-      search: '',
-      cityList: [
-        {
-          id: 1,
-          name: 'Vilnius'
-        },
-        {
-          id: 2,
-          name: 'Kaunas'
-        },
-        {
-          id: 3,
-          name: 'Trakai'
-        }
-      ]
+      query: '',
+      cityList: json
+    }
+  },
+  
+  methods: {
+    shareData(){
+      this.$router.push({ name: 'Home', params: { data: this.query}})
     }
   },
 
   computed: {
     filteredCities(){
       return this.cityList.filter(city => {
-        return city.name.toLowerCase().includes(this.search.toLowerCase())
+        return city.name.toLowerCase().includes(this.query.toLowerCase())
        })
     }
   }
