@@ -1,0 +1,33 @@
+.main-box {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  &__temp {
+    font-size: 90px;
+    font-weight: 300;
+  }
+
+  &__town {
+    font-size: 32px;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  &__weather {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin: 0;
+
+    & > span {
+      margin-right: 10px;
+    }
+  }
+
+  &__current {
+    display: flex;
+    align-items: center;
+  }
+}

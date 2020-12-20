@@ -9,10 +9,7 @@
 <script>
 
 export default {
-  name: 'App',
-  components: {
-    // HelloWorld
-  }
+  name: 'App'
 }
 </script>
 

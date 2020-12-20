@@ -2,22 +2,18 @@
 $white-color: #ffffff;
 $light-grey: #9fa0a5;
 $middle-grey: #979797;
-$grey: #4e555e;
-$dark-grey: #3a424c;
+$grey: rgb(78, 85, 94);
+$dark-grey: rgb(58, 66, 76);
 $blue: #54c7fc;
 $darker-blue: #54c9f9;
 
-// $main-text-color: $text-color;
+$font-weight-light: 200;
+
 $color-primary: $white-color;
-// $color-primary-dark:
 $color-primary-light: $light-grey;
 
 $bg-color: $dark-grey;
 $bg-color-2: $grey;
 
-// $border-color: $blue;
-
-
 $secondary: $blue;
-// $secondaryLight:
 $secondaryDark: $darker-blue;

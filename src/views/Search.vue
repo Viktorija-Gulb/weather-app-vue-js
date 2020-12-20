@@ -12,8 +12,8 @@
       <div class='header__left-icon'>
         <icon-base width="30" height="30" viewBox='0 0 51 51'  icon-name="cloud" iconColor='#fff'><SearchIcon /></icon-base>
       </div>
-        <input type="text" v-model="search" class="search-bar" placeholder='Search...' @chsnge="console.log(search)"/>
-        <div class='header__right-icon'>
+        <input type="search" v-model="search" placeholder='Search...' @chsnge="console.log(search)"/>
+        <div class='header__right-icon'>  
           <icon-base width="30" height="30" viewBox='0 0 51 51'  icon-name="cloud" iconColor='#fff'><CancelIcon /></icon-base>
         </div>
       </div>
@@ -44,9 +44,9 @@ export default {
   },
 
   setup() {
-    const {currentWeather, forecast, error, load } = getCurrentWeather()
+    const {currentWeather, error, load } = getCurrentWeather()
     load()
-    return {currentWeather, forecast, error }
+    return {currentWeather, error }
   },
 
   data() {

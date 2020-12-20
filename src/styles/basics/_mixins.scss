@@ -1,0 +1,12 @@
+@mixin title {
+  font-weight: 300;
+  letter-spacing: 0.6px;
+  text-decoration: none;
+  color: $color-primary;
+}
+
+@mixin header-town {
+  font-weight: lighter;
+  letter-spacing: 0.6px;
+  color: $color-primary-light;
+}

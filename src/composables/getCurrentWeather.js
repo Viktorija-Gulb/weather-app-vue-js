@@ -2,7 +2,7 @@ import {ref } from 'vue'
 import {API_KEY, LOCATION} from './../constants'
 
 const getCurrentWeather = () => {
-  const currentWeather = ref(null)
+  const currentWeather = ref([])
   const error = ref(null)
 
   const load = async () => {
