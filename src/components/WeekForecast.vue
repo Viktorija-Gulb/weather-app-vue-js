@@ -1,19 +1,4 @@
-<template>
-  <!-- <div v-if="this.forecast.list">
-    <div class='chart' v-for="day in this.forecast.list.slice(0,5)" :key="day.dt">
-
-      <div class='chart__column'>
-        <div class='chart__weekDay'>{{ day.dt_txt }}</div>
-        <div class='chart__icon'>icon</div>
-        <div class='chart__temp'>
-          <span class='chart__min'>{{displayTemp(day.main.temp_max)}}</span>
-          <span class='chart__max'>{{displayTemp(day.main.temp_min)}}</span>
-        </div>
-        <div class='chart__graph'>gr</div>
-      </div>
-    </div>
-  </div> -->
- 
+<template> 
     <div class='chart' v-if="weekWeather">
       <div class='chart__column' v-for="day in weekWeather" :key="day.id">
         <div class='chart__weekDay'>{{ day.day}}</div>
@@ -35,9 +20,6 @@
 <script>
 import IconBase from '../IconsAsSvg/IconBase.vue'
 import CloudySvg from '../IconsAsSvg/CloudySvg'
-// import weekWeather from '../constants'
-
-// import getForecast from '../composables/getForecast'
 
 export default {
   name: 'WeekForecast',
@@ -91,16 +73,5 @@ export default {
     }
   }
 
-  // setup(){
-  //   const {forecast, error, load } = getForecast()
-  //   load()
-
-  //   return {forecast, error }
-  // },
-  // methods: {
-  //   displayTemp: function( temp )
-  //     {return Math.round(temp - 273.15)}
-  // },
-  
 }
 </script>

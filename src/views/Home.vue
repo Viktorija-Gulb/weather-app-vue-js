@@ -11,7 +11,6 @@
         :location="currentWeather.name" 
         :cloudy="currentWeather.weather[0].main" />
 
-      <div>Search result: {{ query }}</div>
       <div class='bottom-section'>
         <div class='bottom-section__title'>Week forecast</div>
         <div class='bottom-section__forecact' >

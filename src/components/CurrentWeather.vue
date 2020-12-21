@@ -21,7 +21,6 @@ export default {
     CloudySvg
   },
   props: ['mainTemp', 'location', 'cloudy'],
-  // props: ['mainTemp', 'location', 'cloudy', 'serchLocation']
 
   methods: {
     displayTemp(temp){
