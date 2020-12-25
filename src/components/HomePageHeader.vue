@@ -1,5 +1,4 @@
 <template>
-  <div class='top-section'>
     <div class='status-bar'>
       <div class='status-bar__cloud'>
         <icon-base width="30" height="30" viewBox='0 0 51 51' icon-name="cloud"><Cloud /></icon-base>
@@ -18,7 +17,6 @@
         <span class='day-overview__night'>{{ displayTemp(tempMin) }}</span>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

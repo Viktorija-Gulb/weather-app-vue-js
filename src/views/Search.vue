@@ -12,7 +12,7 @@
       <div class='header__left-icon'>
         <icon-base width="30" height="30" viewBox='0 0 51 51'  icon-name="cloud" iconColor='#fff'><SearchIcon /></icon-base>
       </div>
-        <input type="search" v-model="query" placeholder='Search...' @keyup.enter="submit"/>
+        <input type="search" v-model="query" placeholder='Search...' @keyup.enter="submit" @change="searchCity()"/>
         <div class='header__right-icon'>  
           <icon-base width="30" height="30" viewBox='0 0 51 51'  icon-name="cloud" iconColor='#fff'><CancelIcon /></icon-base>
         </div>
@@ -20,7 +20,7 @@
     </div>
     <div class="search-results">
       <ul class="results-list">
-        <li class="results-list__item"   v-for="city in this.filteredCities" :key="city.id">{{city.name}}</li>
+        <li class="results-list__item"  v-for="city in this.filteredCities" :key="city.id">{{city.name}}</li>
       </ul>
     </div>
     
@@ -32,7 +32,7 @@
 import SearchIcon from '../IconsAsSvg/SearchIcon'
 import CancelIcon from '../IconsAsSvg/CancelIcon'
 import getCurrentWeather from '../composables/getCurrentWeather'
-import json from '../cityList.json'
+// import json from '../cityList.json'
 
 export default {
   name: 'Search',
@@ -50,13 +50,35 @@ export default {
   data() {
     return {
       query: '',
-      cityList: json
+      // cityList: json
+      cityList: [
+        {
+          id: 1,
+          name: "Vilnius"
+        },
+        {
+          id: 2,
+          name: "Kaunas"
+        },
+        {
+          id: 3,
+          name: "Trakai"
+        },
+        {
+          id:4,
+          name: "Utena"
+        }
+      ]
     }
   },
   
   methods: {
     shareData(){
       this.$router.push({ name: 'Home', params: { data: this.query}})
+    },
+
+    searchCity(){
+      console.log(this.query)
     }
   },
 
@@ -66,6 +88,7 @@ export default {
         return city.name.toLowerCase().includes(this.query.toLowerCase())
        })
     }
+
   }
 }
 

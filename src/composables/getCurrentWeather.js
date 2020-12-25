@@ -1,5 +1,5 @@
 import {ref } from 'vue'
-import {API_KEY, LOCATION} from './../constants'
+import {API_KEY, LOCATION, URL_BASE} from './../constants'
 
 const getCurrentWeather = () => {
   const currentWeather = ref([])
@@ -7,7 +7,7 @@ const getCurrentWeather = () => {
 
   const load = async () => {
     try {
-      let data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${LOCATION}&appid=${API_KEY}`)
+      let data = await fetch(`${URL_BASE}/weather?q=${LOCATION}&appid=${API_KEY}`)
 
       if(!data.ok) {
         throw Error('no data available')
