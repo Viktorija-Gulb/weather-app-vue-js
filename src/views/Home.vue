@@ -17,7 +17,7 @@
         <div class='bottom-section__title'>Week forecast</div>
         <div class='bottom-section__forecact'>
           <WeekForecast 
-          :weekData="this.weekData"
+            :weekData="this.weekData"
           />
         </div>
       </div>

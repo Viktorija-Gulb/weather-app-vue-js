@@ -5,7 +5,7 @@
       <h2 class='main-box__town'>{{ location }}</h2>
       <div class='main-box__weather'>
         <span class='main-box__current'>{{ weather }}</span>
-        <weather-switch-component />
+        <weather-switch-component :weather="weather" />
         
       </div>
     </div>
