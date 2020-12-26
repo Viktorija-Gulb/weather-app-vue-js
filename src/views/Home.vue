@@ -1,7 +1,7 @@
 <template>
     <div class='wrapper'>
 
-      <div class='weather-box' v-if="typeof currentWeather.main !== 'undefined'">
+      <div class='weather-box' v-if="typeof currentWeather !== 'undefined'">
         <home-page-header 
           :location="currentWeather.name" 
           :tempMax="currentWeather.main.temp_max" 
@@ -10,13 +10,15 @@
         <CurrentWeather 
           :mainTemp="currentWeather.main.temp" 
           :location="currentWeather.name" 
-          :cloudy="currentWeather.weather[0].main" />
+          :weather="currentWeather.weather[0].main" />
       </div>
 
       <div class='bottom-section'>
         <div class='bottom-section__title'>Week forecast</div>
-        <div class='bottom-section__forecact' >
-          <WeekForecast />
+        <div class='bottom-section__forecact'>
+          <WeekForecast 
+          :weekData="this.weekData"
+          />
         </div>
       </div>
     </div>
@@ -43,7 +45,10 @@ export default {
   data() {
     return{
       currentWeather: {},
-      query: this.$route.params.data ? this.$route.params.data : 'Vilnius'
+      query: this.$route.params.data ? this.$route.params.data : 'Vilnius',
+      weekData: [],
+      latitude: null,
+      longitude: null
     }
   },
 
@@ -58,11 +63,12 @@ export default {
   },
 
   mounted(){
+    this.getWeekData();
     this.query = this.$route.params.data
   },
 
   methods: {
-
+    
     fetchWeather(){
       console.log('methods query ', this.query)
       fetch(`${URL_BASE}/weather?q=${this.query}&appid=${API_KEY}`)
@@ -72,7 +78,18 @@ export default {
     },
     setResults (results) {
       this.currentWeather = results;
-    }
+      console.log('curent weather',this.currentWeather)
+    },
+
+    async getWeekData(){
+      this.latitude = this.currentWeather.coord.lat
+      this.longitude = this.currentWeather.coord.lon
+
+      const res = await fetch(`${URL_BASE}/onecall?lat=${this.latitude}&lon=${this.longitude}&exclude=alerts,hourly,minutely&appid=${API_KEY}`);
+      const data = await res.json();
+      this.weekData = data.daily;
+      console.log('response', this.weekData)
+    },
   }
 
 }

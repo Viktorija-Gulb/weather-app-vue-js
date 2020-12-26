@@ -3,24 +3,25 @@
     <div class='main-box__wrapper'>
       <div class='main-box__temp'>{{ displayTemp(mainTemp) }}&#176;</div>
       <h2 class='main-box__town'>{{ location }}</h2>
-      <p class='main-box__weather'>
-        <span class='main-box__current'>{{ cloudy}}</span>
-        <icon-base width="25" height="25" viewBox="0 0 42 27" icon-name="cloud"><CloudySvg /></icon-base>
-      </p>
+      <div class='main-box__weather'>
+        <span class='main-box__current'>{{ weather }}</span>
+        <weather-switch-component />
+        
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import '../styles/components/CurrentWeather.scss'
-import CloudySvg from '../IconsAsSvg/CloudySvg'
+import WeatherSwitchComponent from './WeatherSwitchComponent.vue'
 
 export default {
   home: 'CurrentWeather',
   components: {
-    CloudySvg
+    WeatherSwitchComponent
   },
-  props: ['mainTemp', 'location', 'cloudy'],
+  props: ['mainTemp', 'location', 'weather'],
 
   methods: {
     displayTemp(temp){
