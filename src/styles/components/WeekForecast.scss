@@ -1,0 +1,44 @@
+@import '../basics/variables';
+
+.chart {
+  display: flex;
+  font-size: 14px;
+
+  &__column {
+    width: 33%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__weekDay {
+    font-weight: $font-weight-light;
+  }
+
+  &__max,
+  &__min {
+    font-weight: $font-weight-light;
+  }
+  &__min {
+    margin-left: 5px;
+    color: $color-primary-light;
+  }
+
+  &__graph {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  &__graph-max {
+    width: 50%;
+    background-color: #f1961c;
+  }
+
+  &__graph-min {
+    width: 50%;
+    background-color: #6b87bc;
+  }
+}

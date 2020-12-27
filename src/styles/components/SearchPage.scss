@@ -1,0 +1,96 @@
+@import '../basics/variables';
+@import '../basics/mixins';
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background-color: $bg-color;
+
+  &__title {
+    @include title;
+  }
+
+  &__top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  &__location {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__btn {
+    position: absolute;
+    left: 0;
+    color: $secondaryDark;
+    background-color: transparent;
+    border-style: none;
+    font-size: 18px;
+    font-weight: $font-weight-light;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  &__subtitle {
+    @include header-town;
+  }
+
+  &__search-box {
+    margin-top: 15px;
+    height: 30px;
+    position: relative;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    & > input {
+      @include title;
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-sizing: border-box;
+      width: 100%;
+      height: 30px;
+      background-color: $bg-color-2;
+      border: 1px solid $secondary;
+      border-radius: 5px;
+      padding: 5px 5px 5px 25px;
+    }
+  }
+
+  &__left-icon {
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    z-index: 5;
+  }
+}
+
+#search::-webkit-search-cancel-button{
+  position:relative;
+  right: 5px;  
+
+  -webkit-appearance: none;
+  height: 15px;
+  width: 15px;
+  border-radius:10px;
+  background: url(../../IconsAsSvg/CancelIcon.svg) no-repeat;
+  background-size: cover;
+}
+
+.search-results {
+  padding: 10px 15px;
+  text-align: left;
+}
+.results-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    padding: 10px 0;
+    border-bottom: 1px solid #979797;
+    @include header-town;
+  }
+}

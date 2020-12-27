@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import '../styles/components/WeekForecast.scss'
 import WeatherSwitchComponent from './WeatherSwitchComponent.vue'
 
 export default {

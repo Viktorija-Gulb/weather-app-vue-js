@@ -12,14 +12,11 @@
       <div class='header__left-icon'>
         <icon-base width="30" height="30" viewBox='0 0 51 51'  icon-name="cloud" iconColor='#fff'><SearchIcon /></icon-base>
       </div>
-        <input type="search" v-model="query" placeholder='Search...' @keyup.enter="submit" />
-        <div class='header__right-icon'>  
-          <icon-base width="30" height="30" viewBox='0 0 51 51'  icon-name="cloud" iconColor='#fff'><CancelIcon /></icon-base>
-        </div>
+        <input type="search" id="search" v-model="query" placeholder='Search...' @keyup.enter="submit" />
       </div>
     </div>
     <div class="search-results">
-      <ul class="results-list">
+      <ul class="results-list" v-if="this.filteredCities.length > 0">
         <li class="results-list__item" v-for="city in this.filteredCities" :key="city.id" @click="selectCity(city.name)">{{city.name}}</li>
       </ul>
     </div>
@@ -28,16 +25,14 @@
 </template>
 
 <script>
-
+import '../styles/components/SearchPage.scss'
 import SearchIcon from '../IconsAsSvg/SearchIcon'
-import CancelIcon from '../IconsAsSvg/CancelIcon'
 import getCurrentWeather from '../composables/getCurrentWeather'
 
 export default {
   name: 'Search',
   components: {
-    SearchIcon,
-    CancelIcon
+    SearchIcon
   },
 
   setup() {

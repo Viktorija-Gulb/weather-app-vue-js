@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import '../styles/components/HomePageHeader.scss'
 import Cloud from '../IconsAsSvg/Cloud'
 import SettingsSvg from '../IconsAsSvg/SettingsSvg'
 

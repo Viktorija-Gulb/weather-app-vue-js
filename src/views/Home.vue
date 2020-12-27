@@ -32,7 +32,7 @@ import HomePageHeader from '../components/HomePageHeader.vue'
 
 // import getCurrentWeather from '../composables/getCurrentWeather'
 import CurrentWeather from '../components/CurrentWeather.vue'
-import { API_KEY, URL_BASE } from '../constants'
+import { API_KEY, LOCATION, URL_BASE } from '../constants'
 
 export default {
   name: 'Home',
@@ -45,7 +45,7 @@ export default {
   data() {
     return{
       currentWeather: {},
-      query: this.$route.params.data ? this.$route.params.data : 'Vilnius',
+      query: this.$route.params.data ? this.$route.params.data : LOCATION,
       weekData: [],
       latitude: null,
       longitude: null
@@ -70,7 +70,6 @@ export default {
   methods: {
     
     fetchWeather(){
-      console.log('methods query ', this.query)
       fetch(`${URL_BASE}/weather?q=${this.query}&appid=${API_KEY}`)
         .then(res => {
           return res.json();
@@ -89,7 +88,7 @@ export default {
       const data = await res.json();
       this.weekData = data.daily;
       console.log('response', this.weekData)
-    },
+    }
   }
 
 }

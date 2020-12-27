@@ -1,0 +1,34 @@
+@import '../basics/variables';
+@import '../basics/mixins';
+
+.status-bar {
+  display: flex;
+  padding: 10px 15px;
+  background-color: $bg-color;
+  &__location {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  &__town {
+    @include header-town;
+  }
+  &__title {
+    @include title;
+  }
+}
+
+.day-overview {
+  display: flex;
+  padding: 10px 15px;
+  background-color: $bg-color;
+  text-align: left;
+
+  &__title {
+    flex: 1;
+  }
+
+  &__day {
+    margin-right: 10px;
+  }
+}
