@@ -50,7 +50,6 @@ export default {
 
   async created(){
     const res = await fetch('http://localhost:8080/cityList.json');
-    // const res = await fetch('http://localhost:8080/data.json');
     const data = await res.json();
     this.data = Object.freeze(data);
   },

@@ -17,7 +17,7 @@
         <div class='bottom-section__title'>Week forecast</div>
         <div class='bottom-section__forecact'>
           <WeekForecast 
-            :weekData="this.weekData"
+            :weekData="this.weekData.slice(1)"
           />
         </div>
       </div>
@@ -29,8 +29,6 @@
 import '../styles/components/Home.scss'
 import WeekForecast from '../components/WeekForecast.vue'
 import HomePageHeader from '../components/HomePageHeader.vue'
-
-// import getCurrentWeather from '../composables/getCurrentWeather'
 import CurrentWeather from '../components/CurrentWeather.vue'
 import { API_KEY, LOCATION, URL_BASE } from '../constants'
 
@@ -52,11 +50,6 @@ export default {
     }
   },
 
-  // setup() {
-  //   const {currentWeather, error, load } = getCurrentWeather()
-  //   load()
-  //   return {currentWeather, error }
-  // },
 
   created() {
     this.fetchWeather()
@@ -68,7 +61,6 @@ export default {
   },
 
   methods: {
-    
     fetchWeather(){
       fetch(`${URL_BASE}/weather?q=${this.query}&appid=${API_KEY}`)
         .then(res => {
@@ -77,7 +69,6 @@ export default {
     },
     setResults (results) {
       this.currentWeather = results;
-      console.log('curent weather',this.currentWeather)
     },
 
     async getWeekData(){
@@ -87,7 +78,6 @@ export default {
       const res = await fetch(`${URL_BASE}/onecall?lat=${this.latitude}&lon=${this.longitude}&exclude=alerts,hourly,minutely&appid=${API_KEY}`);
       const data = await res.json();
       this.weekData = data.daily;
-      console.log('response', this.weekData)
     }
   }
 

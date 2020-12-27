@@ -37,6 +37,5 @@ export default {
       return Math.round(temp - 273.15);
     }
   }
-
 }
 </script>
