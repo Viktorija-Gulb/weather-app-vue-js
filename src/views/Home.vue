@@ -50,7 +50,6 @@ export default {
     }
   },
 
-
   created() {
     this.fetchWeather()
   },
@@ -61,14 +60,10 @@ export default {
   },
 
   methods: {
-    fetchWeather(){
-      fetch(`${URL_BASE}/weather?q=${this.query}&appid=${API_KEY}`)
-        .then(res => {
-          return res.json();
-        }).then(this.setResults);
-    },
-    setResults (results) {
-      this.currentWeather = results;
+    async fetchWeather(){
+      const res = await fetch(`${URL_BASE}/weather?q=${this.query}&appid=${API_KEY}`);
+      const data = await res.json();
+      this.currentWeather = data;
     },
 
     async getWeekData(){

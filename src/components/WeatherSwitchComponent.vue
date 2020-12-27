@@ -22,13 +22,10 @@ import IconBase from '../IconsAsSvg/IconBase.vue'
 import CloudySvg from '../IconsAsSvg/CloudySvg'
 import CloudRainSvg from '../IconsAsSvg/CloudRainSvg'
 import SunSvg from '../IconsAsSvg/SunSvg.vue'
-// import CloudSunSvg from '../IconsAsSvg/CloudSunSvg.vue'
 
 export default {
   home: 'WeatherSwitchComponent',
-  components: { IconBase, CloudySvg, CloudRainSvg, SunSvg, 
-  // CloudSunSvg 
-  },
+  components: { IconBase, CloudySvg, CloudRainSvg, SunSvg },
   props: ['weather']
 }
 </script>
