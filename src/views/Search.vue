@@ -43,16 +43,16 @@ export default {
 
   data() {
     return {
-      baseUrl: process.env.VUE_APP_BASE_URL,
       query: '',
-      data: [],
-      cityList: []
-
+      data: []
     }
   },
 
-  mounted() {
-    this.getList()
+  async created(){
+    const res = await fetch('http://localhost:8080/cityList.json');
+    // const res = await fetch('http://localhost:8080/data.json');
+    const data = await res.json();
+    this.data = Object.freeze(data);
   },
   
   methods: {
@@ -61,12 +61,6 @@ export default {
     },
     selectCity(name){
       this.query = name;
-    },
-    async getList(){
-      // const res = await fetch('http://localhost:8080/cityList.json');
-      const res = await fetch('http://localhost:8080/data.json');
-      const data = await res.json();
-      this.data = data;
     }
   },
 

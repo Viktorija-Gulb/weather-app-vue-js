@@ -1,6 +1,5 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "@/views/Home.vue";
-// import Search from "@/views/Search.vue";
 
 const routes = [
   {
@@ -12,7 +11,6 @@ const routes = [
     path: "/search",
     name: "Search",
     component: () => import(/* webpackChunkName: "search" */ '../views/Search.vue')
-    // component: Search
   },
 ];
 
