@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="search-results">
-      <ul class="results-list" v-if="this.filteredCities.length > 0">
+      <ul class="results-list" v-if="this.filteredCities">
         <li class="results-list__item" v-for="city in this.filteredCities" :key="city.id" @click="selectCity(city.name)">{{city.name}}</li>
       </ul>
     </div>
